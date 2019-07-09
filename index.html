@@ -1,51 +1,70 @@
 !<DOCTYPE html>
 <html>
-    <head>
-          <title>My Awesome Presentation</title>
-              <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
-                  <style type="text/css">
-      @import url(https://fonts.googleapis.com/css?family=Yanone+Kaffeesatz);
-            @import url(https://fonts.googleapis.com/css?family=Droid+Serif:400,700,400italic);
-                  @import url(https://fonts.googleapis.com/css?family=Ubuntu+Mono:400,700,400italic);
-                        body { font-family: 'Droid Serif'; }
-                              h1, h2, h3 {
-                                        font-family: 'Yanone Kaffeesatz';
-                                                  font-weight: normal;
-                                                          }
-                                    .remark-code, .remark-inline-code { font-family: 'Ubuntu Mono'; }
-                                        </style>
-                                          </head>
-                                            <body>
-                                                  <textarea id="source">
+  <head>
+    <title>FP 101</title>
+      <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+      <style type="text/css">
+        @import url(https://fonts.googleapis.com/css?family=Yanone+Kaffeesatz);
+        @import url(https://fonts.googleapis.com/css?family=Droid+Serif:400,700,400italic);
+        @import url(https://fonts.googleapis.com/css?family=Ubuntu+Mono:400,700,400italic);
+        body { font-family: 'Droid Serif'; }
+        h1, h2, h3 {
+          font-family: 'Yanone Kaffeesatz';
+          font-weight: normal;
+        }
+        .remark-code, .remark-inline-code { font-family: 'Ubuntu Mono'; }
+      </style>
+  </head>
+  <body>
+    <textarea id="source">
 
-                                                    class: center, middle
+class: center, middle
 
-                                                    # My Awesome Presentation
+# Functional Programming 101 
 
-                                                    ???
+Elliot Stern
 
-                                                    Notes for the _first_ slide!
+---
 
-                                                    ---
+# What is functional programming?
+ 
+--
+- programming with functions as the basic building block, instead of procedures or objects.
 
-                                                    # Agenda
+# What's a function?
+ 
+--
 
-                                                    1. Introduction
-                                                    2. Deep-dive
-                                                    3. ...
+- A function is a pure mapping from inputs to outputs
 
-                                                    [NOTE]: Note that you need active internet connection to access remark.js script file
-                                                    ---
+---
 
-                                                    # Introduction
+# Referential Transparency
 
-                                                        </textarea>
-                                                            <script src="https://remarkjs.com/downloads/remark-latest.min.js" type="text/javascript">
+- an expression is pure or "referentially transparent" if it can be replaced with the value it evaluates to without changing the semantics at all
+
+---
+# Referentially transparent expressions
+
+- 1 + 1
+- [1,2,3](1)
+
+---
+
+# Not referentially transparent
+
+- x = 5;
+- x++;
+- foo.setBar(bar);
+- log("hello world");
+
+      </textarea>
+    <script src="https://remarkjs.com/downloads/remark-latest.min.js" type="text/javascript">
     </script>
-        <script type="text/javascript">
+    <script type="text/javascript">
       var slideshow = remark.create();
-          </script>
-            </body>
+    </script>
+  </body>
 </html>
 
 
