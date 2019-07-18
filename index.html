@@ -41,6 +41,18 @@ Elliot Stern
 
 ---
 
+# Brief History
+
+- 1936: Lambda Calculus
+- 1958: LISP
+- 1973: ML
+- 1990: Haskell
+- 2005: F#
+- 2004: Scala
+
+Many multiparadigm languages with functional influences: Python, Ruby, Javascript, Scala, F#, C#, Rust.
+---
+
 # Referential Transparency
 
 - an expression is pure or "referentially transparent" if it can be replaced with the value it evaluates to without changing the semantics at all
@@ -68,7 +80,7 @@ Elliot Stern
 * immutability
 * explicitly passed state
 * recursion
-* higher order functions
+* first-class functions
 
 ---
 
@@ -104,12 +116,44 @@ function () {
 ```
 ---
 
-# Higher order functions
+# anonymous functions
 
-* 
+- Instead of defining a named function, you can define a function inline.
+
+```
+var square = function (x) {
+    return x * x;
+};
+
+// New syntax added to Javascript standard in 2015
+var square = x => x * x;
+```
 
 ---
 
+# First-class functions
+
+```
+function derive(f) {
+    var h = 0.000001; 
+    return x => (f(x+h) - f(x)) / h;
+}
+
+```
+---
+# Map
+```
+[1,2,3,4,5].map( x => return x * x);
+// returns [1,4,6,8,25]
+[user1, user2, user3].map( user => user.userName);
+``
+---
+# Reduce
+```
+[1,2,3,4,5].reduce((current, accumulator) => current + accumulator )
+// turns into 1 + 2 + 3 + 4 + 5 = 15
+```
+---
 # Why?
 
 * Local reasoning
@@ -117,24 +161,7 @@ function () {
 * Testability
 * Wholemeal programming
 
----
 
-# Brief History
-
-- 1936: Lambda Calculus
-- 1958: LISP
-- 1973: ML
-- 1990: Haskell
-- 2005: F#
-- 2004: Scala
-
-Many multiparadigm languages with functional influences: Python, Ruby, Javascript, Scala, F#, C#, Rust.
-
----
-
-# anonymous functions
-
-- Instead of defining a named function, you can define a function inline.
 
       </textarea>
     <script src="https://remarkjs.com/downloads/remark-latest.min.js" type="text/javascript">
