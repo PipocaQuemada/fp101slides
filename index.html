@@ -31,6 +31,8 @@ Elliot Stern
 --
 - programming with functions as the basic building block, instead of procedures or objects.
 
+---
+
 # What's a function?
  
 --
@@ -45,18 +47,75 @@ Elliot Stern
 
 ---
 # Referentially transparent expressions
-
-- 1 + 1
-- [1,2,3](1)
-
+```
+1 + 1
+[1,2,3](1)
+(new Date('2019-06-29T03:24:00')).getDay // gets the day of the week that June 29th occurred on
+```
 ---
 
 # Not referentially transparent
+```
+ x = 5;
+ x++;
+ foo.setBar(bar);
+ log("hello world");
+```
 
-- x = 5;
-- x++;
-- foo.setBar(bar);
-- log("hello world");
+---
+
+# How do we write referentially transparent code?
+* immutability
+* explicitly passed state
+* recursion
+* higher order functions
+
+---
+
+# Immutability
+
+* Don't use mutators.  Instead, return new, slightly modified versions of your data
+
+```
+function User(username, password) {
+  return {
+    username = username;
+    password = password;
+    setUsername = function (newUsername) { User(newUsername, password) };
+    setPassword= function (newPassword) { User(username, newPassword) };
+  };
+}
+
+val user = User("JRandomUser", "12345");
+val editedUsername = user.setPassword("54321");
+```
+
+---
+
+# Explicit state
+
+- Don't rely on external, global state.  Instead, if a function relies on state it should either be a parameter orpart of the return value
+
+```
+function () {
+
+}
+
+```
+---
+
+# Higher order functions
+
+* 
+
+---
+
+# Why?
+
+* Local reasoning
+* Equational reasoning
+* Testability
+* Wholemeal programming
 
       </textarea>
     <script src="https://remarkjs.com/downloads/remark-latest.min.js" type="text/javascript">
