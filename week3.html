@@ -21,69 +21,42 @@
 class: center, middle
 
 # Functional Programming 101 
-## Week 1
 
 Elliot Stern
 
----
-
-# What is functional programming?
- 
---
-- programming with functions as the basic building block, instead of procedures or objects.
 
 ---
 
-# What's a function?
- 
---
+# Immutability
 
-- A function is a pure mapping from inputs to outputs
+* Don't use mutators.  Instead, return new, slightly modified versions of your data
 
----
-
-# Brief History
-
-- 1936: Lambda Calculus
-- 1958: LISP
-- 1973: ML
-- 1990: Haskell
-- 2005: F#
-- 2004: Scala
-
-Many multiparadigm languages with functional influences: Python, Ruby, Javascript, Scala, F#, C#, Rust.
----
-
-# Referential Transparency
-
-- an expression is pure or "referentially transparent" if it can be replaced with the value it evaluates to without changing the semantics at all
-
----
-# Referentially transparent expressions
 ```
-1 + 1
-[1,2,3](1)
-(new Date('2019-06-29T03:24:00')).getDay // gets the day of the week that June 29th occurred on
-```
----
+function User(username, password) {
+  return {
+    username = username;
+    password = password;
+    setUsername = function (newUsername) { User(newUsername, password) };
+    setPassword= function (newPassword) { User(username, newPassword) };
+  };
+}
 
-# Not referentially transparent
-```
- x = 5;
- x++;
- foo.setBar(bar);
- log("hello world");
+val user = User("JRandomUser", "12345");
+val editedUsername = user.setPassword("54321");
 ```
 
 ---
 
-# How do we write referentially transparent code?
-* immutability
-* explicitly passed state
-* recursion
-* first-class functions
+# Explicit state
 
+- Don't rely on external, global state.  Instead, if a function relies on state it should either be a parameter orpart of the return value
 
+```
+function () {
+
+}
+
+```
       </textarea>
     <script src="https://remarkjs.com/downloads/remark-latest.min.js" type="text/javascript">
     </script>

@@ -21,67 +21,62 @@
 class: center, middle
 
 # Functional Programming 101 
-## Week 1
 
 Elliot Stern
 
 ---
+# First-class functions
 
-# What is functional programming?
- 
---
-- programming with functions as the basic building block, instead of procedures or objects.
-
+- "First class" means that it's something the language can manipulate, just like any other "normal" value
+- For example: the ability to store in a variable, to take as a function parameter, or use as a functions return value.
 ---
+# anonymous functions
 
-# What's a function?
- 
---
+- Instead of defining a named function, you can define a function inline.
 
-- A function is a pure mapping from inputs to outputs
-
----
-
-# Brief History
-
-- 1936: Lambda Calculus
-- 1958: LISP
-- 1973: ML
-- 1990: Haskell
-- 2005: F#
-- 2004: Scala
-
-Many multiparadigm languages with functional influences: Python, Ruby, Javascript, Scala, F#, C#, Rust.
----
-
-# Referential Transparency
-
-- an expression is pure or "referentially transparent" if it can be replaced with the value it evaluates to without changing the semantics at all
-
----
-# Referentially transparent expressions
 ```
-1 + 1
-[1,2,3](1)
-(new Date('2019-06-29T03:24:00')).getDay // gets the day of the week that June 29th occurred on
+var square = function (x) {
+    return x * x;
+};
+
+// New syntax added to Javascript standard in 2015
+var square = x => x * x;
 ```
 ---
+# Free Variables
 
-# Not referentially transparent
-```
- x = 5;
- x++;
- foo.setBar(bar);
- log("hello world");
-```
+- A variable which doesn't appear inside a function definition is "free" variable
 
+```
+// y is "free" in the context of this function
+var addY = x => x + y
+```
 ---
+# Closures
+"Closes over" an environment
+---
+# First-class functions
 
-# How do we write referentially transparent code?
-* immutability
-* explicitly passed state
-* recursion
-* first-class functions
+```
+function derive(f) {
+    var h = 0.000001; 
+    return x => (f(x+h) - f(x)) / h;
+}
+
+```
+---
+# Map
+```
+[1,2,3,4,5].map( x => return x * x);
+// returns [1,4,6,8,25]
+[user1, user2, user3].map( user => user.userName);
+``
+---
+# Reduce
+```
+[1,2,3,4,5].reduce((current, accumulator) => current + accumulator )
+// turns into 1 + 2 + 3 + 4 + 5 = 15
+```
 
 
       </textarea>
