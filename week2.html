@@ -20,7 +20,7 @@
 
 class: center, middle
 
-# Functional Programming 101 
+# Functional Programming 101
 
 Elliot Stern
 
@@ -29,54 +29,94 @@ Elliot Stern
 
 - "First class" means that it's something the language can manipulate, just like any other "normal" value
 - For example: the ability to store in a variable, to take as a function parameter, or use as a functions return value.
+- So: first class functions can be returned from functions, or taken as arguments
+
+---
+
+# Map
+```
+
+function square(x){
+  return x * x;
+}
+
+[1,2,3,4,5].map(square);
+// returns [1,4,6,8,25]
+```
 ---
 # anonymous functions
 
-- Instead of defining a named function, you can define a function inline.
+- Instead of defining a named function, in some languages you can define a function inline.
 
 ```
-var square = function (x) {
-    return x * x;
-};
+[1,2,3,4,5].map(function(x) { return x * x });
 
 // New syntax added to Javascript standard in 2015
-var square = x => x * x;
+
+[user1, user2, user3].map( user => user.userName);
+// returns ["estern", "ryansb", "lois"]
 ```
+
 ---
+
 # Free Variables
 
 - A variable which doesn't appear inside a function definition is "free" variable
+
 
 ```
 // y is "free" in the context of this function
 var addY = x => x + y
 ```
+
 ---
+
 # Closures
-"Closes over" an environment
----
-# First-class functions
+"Closes over" an environment, storing references to variables currently in scope
 
 ```
 function derive(f) {
-    var h = 0.000001; 
+    var h = 0.000001;
+    // f is free in the context of the function we return
+    // so this returns a closure with a reference to the f that was passed in
     return x => (f(x+h) - f(x)) / h;
 }
 
+var slopeOfXSqaured = derive(x => x * x);
+slopeOfXSquared(1); // 2.0000009999243673
+slopeOfXSquared(2); // 4.0000010006480125
+
+var slopeOf2X = derive(x => 2 * x);
+slopeOf2x(1) // 1.9999999998354667
+slopeOf2x(2) // 2.000000000279556
+
 ```
+
 ---
-# Map
-```
-[1,2,3,4,5].map( x => return x * x);
-// returns [1,4,6,8,25]
-[user1, user2, user3].map( user => user.userName);
-``
----
+
 # Reduce
 ```
-[1,2,3,4,5].reduce((current, accumulator) => current + accumulator )
+[1,2,3,4,5].reduce((accumulator, current) => current + accumulator )
 // turns into 1 + 2 + 3 + 4 + 5 = 15
 ```
+
+---
+# Reduce, continued
+
+function Average(total, count) {
+    this.total = total;
+    this.count = count;
+    this.val = total / count;
+    this.add = other => new Average(total + other.total, count + other.count);
+}
+var zeroAverage = new Average(0, 0)
+function toAverage(x) {
+    return new Average(x, 1);
+}
+[1,2,3,4,5]
+  .map(toAverage)
+  .reduce((accumulator, current) => current.add(accumulator), zeroAverage).val
+  // 3
 
 
       </textarea>

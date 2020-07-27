@@ -20,7 +20,7 @@
 
 class: center, middle
 
-# Functional Programming 101 
+# Functional Programming 101
 ## Week 1
 
 Elliot Stern
@@ -28,7 +28,7 @@ Elliot Stern
 ---
 
 # What is functional programming?
- 
+
 --
 
 - programming with functions as the basic building block, instead of procedures or objects.
@@ -37,7 +37,7 @@ Elliot Stern
 ---
 
 # What's a function?
- 
+
 --
 
 - A function is a pure mapping from inputs to outputs
@@ -88,9 +88,37 @@ Many multiparadigm languages with functional influences: Python, Ruby, Javascrip
 
 # How do we write referentially transparent code?
 * immutability
-* explicitly passed state
+* explicitly passed "state"
 * recursion
 * first-class functions
+
+---
+
+# Why bother?
+
+* Testability
+* Local reasoning
+* Compositionality
+* Less buggy code
+  - No fencepost errors in loops
+  - No Null Pointer Exceptions in Haskell
+* Concision
+
+---
+
+Pure functional programming
+
+* Everything is referentially transparent
+* Allows "equational reasoning"
+* more complex - only became practical ~1990
+
+---
+
+Impure functional programming
+
+* Some things are referentially transparent
+* Up to programmer to remember what stuff is and isn't pure
+* Simple - dates back to 1958
 
 
       </textarea>
