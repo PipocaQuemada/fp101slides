@@ -34,7 +34,7 @@ Elliot Stern
 ---
 
 # Map
-```
+```javascript
 
 function square(x){
   return x * x;
@@ -48,7 +48,7 @@ function square(x){
 
 - Instead of defining a named function, in some languages you can define a function inline.
 
-```
+```javascript
 [1,2,3,4,5].map(function(x) { return x * x });
 
 // New syntax added to Javascript standard in 2015
@@ -64,7 +64,7 @@ function square(x){
 - A variable which doesn't appear inside a function definition is "free" variable
 
 
-```
+```javascript
 // y is "free" in the context of this function
 var addY = x => x + y
 ```
@@ -74,7 +74,7 @@ var addY = x => x + y
 # Closures
 "Closes over" an environment, storing references to variables currently in scope
 
-```
+```javascript
 function derive(f) {
     var h = 0.000001;
     // f is free in the context of the function we return
@@ -95,7 +95,7 @@ slopeOf2x(2) // 2.000000000279556
 ---
 
 # Reduce
-```
+```javascript
 [1,2,3,4,5].reduce((accumulator, current) => current + accumulator )
 // turns into 1 + 2 + 3 + 4 + 5 = 15
 ```
@@ -103,6 +103,7 @@ slopeOf2x(2) // 2.000000000279556
 ---
 # Reduce, continued
 
+```javascript
 function Average(total, count) {
     this.total = total;
     this.count = count;
@@ -118,6 +119,7 @@ function toAverage(x) {
   .reduce((accumulator, current) => current.add(accumulator), zeroAverage).val
   // 3
 
+```
 
       </textarea>
     <script src="https://remarkjs.com/downloads/remark-latest.min.js" type="text/javascript">
