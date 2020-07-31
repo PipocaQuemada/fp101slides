@@ -44,7 +44,7 @@ function square(x){
 // returns [1,4,6,8,25]
 ```
 ---
-# anonymous functions
+# Anonymous functions
 
 - Instead of defining a named function, in some languages you can define a function inline.
 
@@ -55,6 +55,14 @@ function square(x){
 
 [user1, user2, user3].map( user => user.userName);
 // returns ["estern", "ryansb", "lois"]
+```
+
+---
+
+# Reduce
+```javascript
+[1,2,3,4,5].reduce((accumulator, current) => current + accumulator )
+// turns into 1 + 2 + 3 + 4 + 5 = 15
 ```
 
 ---
@@ -82,7 +90,7 @@ function derive(f) {
     return x => (f(x+h) - f(x)) / h;
 }
 
-var slopeOfXSqaured = derive(x => x * x);
+var slopeOfXSquared = derive(x => x * x);
 slopeOfXSquared(1); // 2.0000009999243673
 slopeOfXSquared(2); // 4.0000010006480125
 
@@ -91,19 +99,33 @@ slopeOf2x(1) // 1.9999999998354667
 slopeOf2x(2) // 2.000000000279556
 
 ```
-
 ---
 
-# Reduce
-```javascript
-[1,2,3,4,5].reduce((accumulator, current) => current + accumulator )
-// turns into 1 + 2 + 3 + 4 + 5 = 15
-```
+# A koan about objects and closures
+
+  The venerable master Qc Na was walking with his student, Anton.  Hoping to
+prompt the master into a discussion, Anton said "Master, I have heard that
+objects are a very good thing - is this true?"  Qc Na looked pityingly at
+his student and replied, "Foolish pupil - objects are merely a poor man's
+closures."
+
+  Chastised, Anton took his leave from his master and returned to his cell,
+intent on studying closures.  He carefully read the entire "Lambda: The
+Ultimate..." series of papers and its cousins, and implemented a small
+Scheme interpreter with a closure-based object system.  He learned much, and
+looked forward to informing his master of his progress.
+
+  On his next walk with Qc Na, Anton attempted to impress his master by
+saying "Master, I have diligently studied the matter, and now understand
+that objects are truly a poor man's closures."  Qc Na responded by hitting
+Anton with his stick, saying "When will you learn? Closures are a poor man's
+object."  At that moment, Anton became enlightened.
+
 
 ---
-# Reduce, continued
-
+# Closures as a poor man's object
 ```javascript
+// Javascript object
 function Average(total, count) {
     this.total = total;
     this.count = count;
@@ -114,6 +136,29 @@ var zeroAverage = new Average(0, 0)
 function toAverage(x) {
     return new Average(x, 1);
 }
+// closure as object
+function average2(total, count) {
+  return function(selector, ...args) { // ..args means this takes a variable number of arguments
+    switch (selector) {
+        case "total": return total;
+        case "count": return count;
+        case "val": return total / count;
+        case "add":
+            var other = args[0];
+            return average2(total + other("total"), count + other("count"));
+        default: return undefined;
+    }
+  }
+}
+
+var zeroAverage2 = average2(0, 0);
+function toAverage2(x) {
+    return average2(x, 1);
+}
+```
+---
+# Reduce, continued
+```javascript
 [1,2,3,4,5]
   .map(toAverage)
   .reduce((accumulator, current) => current.add(accumulator), zeroAverage).val
