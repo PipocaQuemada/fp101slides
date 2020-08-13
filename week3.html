@@ -20,18 +20,40 @@
 
 class: center, middle
 
-# Functional Programming 101 
+# Functional Programming 101
 
 Elliot Stern
 
 
 ---
-
 # Immutability
 
-* Don't use mutators.  Instead, return new, slightly modified versions of your data
+Immutable data is data that never changes.
 
+```java
+String s = "foo";
+s + "bar";
+System.out.println(s);
 ```
+
+---
+# Deep copy vs shallow copy
+
+Shallow copy
+  - Copies your object with references to the original object's members
+
+Deep copy
+  - Copies your object with references to a deep copy of the original's members
+
+https://i.stack.imgur.com/e1jOQ.png
+---
+
+If your data is immutable, shallow copies and deep copies are identical.
+
+With immutable objects, 'mutators' return a mutated shallow copy
+
+---
+```javascript
 function User(username, password) {
   return {
     username = username;
@@ -44,19 +66,62 @@ function User(username, password) {
 val user = User("JRandomUser", "12345");
 val editedUsername = user.setPassword("54321");
 ```
+---
+```java
+class User {
+  private String username;
+  private String password;
+  public User(String username, String password){
+    this.username = username;
+    this.password = password;
+  }
+  public User setUsername(String username){ return User(username, password) }
+  public User setPassword(String password){ return User(username, password) }
+}
+```
+---
+
+Data structures
+
+- mutable data structures are sometimes called 'ephemeral'
+
+- immutable data structures are sometimes called 'persistent'
+
+
 
 ---
 
-# Explicit state
+https://en.wikipedia.org/wiki/Persistent_data_structure#/media/File:Purely_functional_list_after.svg
 
-- Don't rely on external, global state.  Instead, if a function relies on state it should either be a parameter orpart of the return value
+---
 
-```
-function () {
+https://en.wikipedia.org/wiki/Persistent_data_structure#/media/File:Purely_functional_tree_after.svg
 
-}
+---
+Libraries
 
-```
+Java: functional Java
+python: pyrsistent
+javascript: immutable.js
+
+---
+
+Why immutability?
+
+* encapsulation
+* fewer hard-to-track down bugs
+* order of effects is less important
+
+---
+
+Time travelling debugger
+
+
+
+---
+---
+---
+
       </textarea>
     <script src="https://remarkjs.com/downloads/remark-latest.min.js" type="text/javascript">
     </script>

@@ -48,7 +48,7 @@ Elliot Stern
 - No:
     - manipulating memory
     - sending data over the wire
-    - displaying something to the screen what's on the screen
+    - displaying something to the screen
 
 ---
 
@@ -69,20 +69,25 @@ Many multiparadigm languages with functional influences: Python, Ruby, Javascrip
 - an expression is pure or "referentially transparent" if it can be replaced with the value it evaluates to without changing the semantics at all
 
 ---
-# Referentially transparent expressions
+# Is it referentially transparent?
 ```
 1 + 1
-[1,2,3](1)
-(new Date('2019-06-29T03:24:00')).getDay // gets the day of the week that June 29th occurred on
-```
----
 
-# Not referentially transparent
-```
- x = 5;
- x++;
- foo.setBar(bar);
- log("hello world");
+{1,2,3}[1]
+
+(new Date('2019-06-29T03:24:00')).getDay // gets the day of the week that June 29th occurred on
+
+x = 5;
+
+x++;
+
+foo.setBar(bar);
+
+log("hello world");
+
+function sum(list) {
+    for // todo
+}
 ```
 
 ---
@@ -92,6 +97,8 @@ Many multiparadigm languages with functional influences: Python, Ruby, Javascrip
 * explicitly passed "state"
 * recursion
 * first-class functions
+* expression-oriented syntax
+* push effects to the edge of your code
 
 ---
 
@@ -104,14 +111,63 @@ Many multiparadigm languages with functional influences: Python, Ruby, Javascrip
   - No fencepost errors in loops
   - No Null Pointer Exceptions in Haskell
 * Concision
+* Easy Refactoring
+* Optimizability
+  - trivial loop fusion
+  - trivial memoization
+  - trivial parallelization
+  - partial evaluation
 
+---
+
+```scala
+// expression oriented switch statement
+// Note: colorHex is an immutable val
+val colorHex = player.color match {
+    case Black => "#000000"
+    case White => "#FFFFFF"
+  }
+
+// statement oriented switch statement
+// Note: colorHex can't be immutable anymore.
+var colorHex = null;
+player.color match {
+  case Black => colorHex = "#000000"
+  case White => colorHex = "#FFFFFF"
+}
+
+```
+---
+# Push effects to the edge of your code; pass state explicitly
+
+```java
+
+interface Game<State> {
+
+  State getInitialState();
+  Picture render(State currentState);
+  State processInput(UserInput input, State currentState);
+  State stepWorld(int elapsedMillis, State currentState);
+}
+
+class MyGameState {
+  Map<Location, Monster> monsters;
+  Map<Location, ItemList> worldItems;
+  ItemList inventory;
+  Stats herosStats;
+  ...
+}
+
+```
 ---
 
 # Pure functional programming
 
 * Everything is referentially transparent
 * Allows "equational reasoning"
-* more complex - only became practical ~1990
+    - ability to replace function with function definition
+    -
+* more complex - the first practical pure FP languages were developed in the early 90s.
 
 ---
 
