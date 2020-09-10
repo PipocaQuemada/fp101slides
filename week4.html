@@ -20,7 +20,7 @@
 
 class: center, middle
 
-# Functional Programming 101 
+# Functional Programming 101
 
 Elliot Stern
 
@@ -49,11 +49,11 @@ Elliot Stern
 
 ---
 # Algebraic Data Types
-- Seen mostly in ML descendants like Haskell or F#. 
+- Seen mostly in ML descendants like Haskell or F#.
 - A tagged union of structs
 ```
 -- Notice: this is a recursive definition of a tree
-data Tree a = 
+data Tree a =
     Node {left :: Tree a, right :: Tree a, value :: a}
   | Leaf
 ```
@@ -69,7 +69,7 @@ sum (Node left right value) = sum left + sum right + value
 
 insert x Leaf = Node Leaf Leaf x
 insert x (Node left right value) =
-  if x > value 
+  if x > value
     then Node left (insert x right) value
     else Node (insert x left) right value
 
@@ -90,6 +90,27 @@ fibonacci 0 = 1
 fibonacci 1 = 1
 fibonacci n = fibonacci (n-1) + fibonacci (n-2)
 ```
+
+---
+# Tail call optimization
+
+If a function's return value is of the form `return foo(x, y, z)`
+
+It doesn't actually have to allocate a new stack frame for the call to foo; it can jump straight to foo
+This is faster and prevents StackOverflowExceptions
+
+Not all languages implement Tail Call Optimization because it makes stack traces less useful.
+
+---
+
+# Structural recursion on numbers, revisited with tail calls:
+```
+factorial n = go n 1
+  where
+    go 0 acc = acc
+    go n acc = go (n - 1) (acc * n)
+
+
       </textarea>
     <script src="https://remarkjs.com/downloads/remark-latest.min.js" type="text/javascript">
     </script>

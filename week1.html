@@ -31,7 +31,7 @@ Elliot Stern
 
 --
 
-- programming with functions as the basic building block, instead of procedures or objects.
+- Programming with functions as the basic building block, instead of procedures or objects.
 - Note: While in Object-oriented programming, "everything is an object", it's not the case in functional or procedural programming that "everything is a function" or "everything is a procedure"
 
 
@@ -46,9 +46,9 @@ Elliot Stern
 ![example function](https://www.ontrack-media.net/algebra1/a1m1l3image9.jpg)
 
 - No:
-    - manipulating memory
-    - sending data over the wire
-    - displaying something to the screen
+    - Manipulating memory
+    - Sending data over the wire
+    - Displaying something to the screen
 
 ---
 
@@ -66,7 +66,7 @@ Many multiparadigm languages with functional influences: Python, Ruby, Javascrip
 
 # Referential Transparency
 
-- an expression is pure or "referentially transparent" if it can be replaced with the value it evaluates to without changing the semantics at all
+- An expression is pure or "referentially transparent" if it can be replaced with the value it evaluates to without changing the semantics at all
 
 ---
 # Is it referentially transparent?
@@ -85,20 +85,22 @@ foo.setBar(bar);
 
 log("hello world");
 
-function sum(list) {
-    for // todo
-}
+def sum(list):
+    i = 0
+    for item in list:
+      i += item
+    i
 ```
 
 ---
 
 # How do we write referentially transparent code?
-* immutability
-* explicitly passed "state"
-* recursion
-* first-class functions
-* expression-oriented syntax
-* push effects to the edge of your code
+* Immutability
+* Explicitly passed "state"
+* Recursion
+* First-class functions
+* Expression-oriented syntax
+* Push effects to the edge of your code
 
 ---
 
@@ -113,15 +115,21 @@ function sum(list) {
 * Concision
 * Easy Refactoring
 * Optimizability
-  - trivial loop fusion
-  - trivial memoization
-  - trivial parallelization
-  - partial evaluation
+  - Trivial loop fusion
+  - Trivial memoization
+  - Trivial parallelization
+  - Partial evaluation
 
 ---
 
 ```scala
-// expression oriented switch statement
+sealed trait Color
+case object Black extends Color
+case object White extends Color
+
+case class Player(color: Color, name: String, avatar: Image)
+
+// Expression oriented switch expression
 // Note: colorHex is an immutable val
 val colorHex = player.color match {
     case Black => "#000000"
@@ -143,7 +151,6 @@ player.color match {
 ```java
 
 interface Game<State> {
-
   State getInitialState();
   Picture render(State currentState);
   State processInput(UserInput input, State currentState);
@@ -155,6 +162,7 @@ class MyGameState {
   Map<Location, ItemList> worldItems;
   ItemList inventory;
   Stats herosStats;
+  Int health
   ...
 }
 
@@ -163,21 +171,25 @@ class MyGameState {
 
 # Pure functional programming
 
-* Everything is referentially transparent
+* _Everything_ is referentially transparent
 * Allows "equational reasoning"
+    - Manipulate programs like equations in algebra class
     - ability to replace function with function definition
-    -
-* more complex - the first practical pure FP languages were developed in the early 90s.
+* More complex
+    - need to play some rhetorical tricks to turn side-effects into pure effects
+* Haskell, Elm, Clean, Miranda, Coq, Idris, Agda
+
 
 ---
 
 # Impure functional programming
 
-* Some things are referentially transparent
+* _Some_ things are referentially transparent
 * Up to programmer to remember what stuff is and isn't pure
 * Simple - dates back to 1958
 
 * Typically: core logic is wholly functional, with imperative shell that interacts with the real world
+
 
       </textarea>
     <script src="https://remarkjs.com/downloads/remark-latest.min.js" type="text/javascript">

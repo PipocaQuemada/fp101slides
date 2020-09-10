@@ -319,3 +319,8 @@ blockquote, .blockquote {
   -moz-border-radius: 5px;
   -webkit-border-radius: 5px;
 }
+
+.scale-image {
+  width: 95%
+  height: 95%
+}

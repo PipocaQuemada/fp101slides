@@ -3,6 +3,7 @@
   <head>
     <title>FP 101</title>
       <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+      <link href="https://pipocaquemada.github.io/fp101slides/style.css" type="text/css" rel="stylesheet">
       <style type="text/css">
         @import url(https://fonts.googleapis.com/css?family=Yanone+Kaffeesatz);
         @import url(https://fonts.googleapis.com/css?family=Droid+Serif:400,700,400italic);
@@ -31,9 +32,15 @@ Elliot Stern
 Immutable data is data that never changes.
 
 ```java
+// immutable
 String s = "foo";
 s + "bar";
 System.out.println(s);
+// not immutable
+ArrayList<String> l = new ArrayList<String>();
+l.add("foo");
+l.add("bar");
+System.out.println(l.toString());
 ```
 
 ---
@@ -45,7 +52,7 @@ Shallow copy
 Deep copy
   - Copies your object with references to a deep copy of the original's members
 
-https://i.stack.imgur.com/e1jOQ.png
+.center[![shallow vs deep copy](https://i.stack.imgur.com/e1jOQ.png)]
 ---
 
 If your data is immutable, shallow copies and deep copies are identical.
@@ -91,17 +98,20 @@ Data structures
 
 ---
 
-https://en.wikipedia.org/wiki/Persistent_data_structure#/media/File:Purely_functional_list_after.svg
+.full-width[![purely functional lists](https://upload.wikimedia.org/wikipedia/commons/thumb/2/2e/Purely_functional_list_after.svg/800px-Purely_functional_list_after.svg.png)]
 
 ---
 
-https://en.wikipedia.org/wiki/Persistent_data_structure#/media/File:Purely_functional_tree_after.svg
+.center[![purely functional trees](https://i.stack.imgur.com/OqrGl.png)]
+---
 
 ---
-Libraries
+# Libraries
 
 Java: functional Java
+
 python: pyrsistent
+
 javascript: immutable.js
 
 ---
