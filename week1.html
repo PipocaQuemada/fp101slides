@@ -73,11 +73,11 @@ Many multiparadigm languages with functional influences: Python, Ruby, Javascrip
 ```
 1 + 1
 
-{1,2,3}[1]
-
 (new Date('2019-06-29T03:24:00')).getDay // gets the day of the week that June 29th occurred on
 
 x = 5;
+
+{1,2,3}[1]
 
 x++;
 
@@ -99,26 +99,13 @@ def sum(list):
 * Explicitly passed "state"
 * Recursion
 * First-class functions
-* Expression-oriented syntax
 * Push effects to the edge of your code
 
----
-
-# Why bother?
-
-* Testability
-* Local reasoning
-* Compositionality
-* Less buggy code
-  - No fencepost errors in loops
-  - No Null Pointer Exceptions in Haskell
-* Concision
-* Easy Refactoring
-* Optimizability
-  - Trivial loop fusion
-  - Trivial memoization
-  - Trivial parallelization
-  - Partial evaluation
+Additionally, functional languages often have:
+* Expression-oriented syntax
+* Type inference
+* Algebraic data types
+* No nulls
 
 ---
 
@@ -167,6 +154,24 @@ class MyGameState {
 }
 
 ```
+---
+
+# Why bother?
+
+* Testability
+* Local reasoning
+* Compositionality
+* Less buggy code
+  - No fencepost errors in loops
+  - No Null Pointer Exceptions in Haskell
+* Concision
+* Easy Refactoring
+* Optimizability
+  - Trivial loop fusion
+  - Trivial memoization
+  - Trivial parallelization
+  - Partial evaluation
+
 ---
 
 # Pure functional programming
