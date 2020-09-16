@@ -79,6 +79,8 @@ x = 5;
 
 {1,2,3}[1]
 
+mutableArray[1]
+
 x++;
 
 foo.setBar(bar);
@@ -132,6 +134,24 @@ player.color match {
 }
 
 ```
+
+---
+
+```haskell
+
+data Color = Black | White
+
+render game = ...
+  where
+    ...
+    -- pattern matching
+    colorHex Black = "#000000"
+    colorHex White = "#FFFFFF"
+    -- switch expression
+    colorHex' color = case color of
+      Black -> "#000000"
+      White -> "#FFFFFF"
+```
 ---
 # Push effects to the edge of your code; pass state explicitly
 
@@ -172,6 +192,28 @@ class MyGameState {
   - Trivial parallelization
   - Partial evaluation
 
+---
+
+# Local reasoning:
+
+```scala
+
+def doSomething(state: State) = {
+  ...
+  val foo = doTheThing(something, frobnicate(state));
+  ...
+  val bar = doSomethingElse(something, frobnicate(state));
+}
+
+// Does this do the same thing?
+def doSomething(state: State) = {
+  ...
+  val frobnicated = frobnicate(state);
+  val foo = doTheThing(something, frobnicated);
+  ...
+  val bar = doSomethingElse(something, frobnicated);
+}
+```
 ---
 
 # Pure functional programming
