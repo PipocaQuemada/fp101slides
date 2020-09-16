@@ -32,6 +32,7 @@ Elliot Stern
 --
 
 - Programming with functions as the basic building block, instead of procedures or objects.
+
 - Note: While in Object-oriented programming, "everything is an object", it's not the case in functional or procedural programming that "everything is a function" or "everything is a procedure"
 
 
@@ -46,8 +47,11 @@ Elliot Stern
 ![example function](https://www.ontrack-media.net/algebra1/a1m1l3image9.jpg)
 
 - No:
+
     - Manipulating memory
+
     - Sending data over the wire
+
     - Displaying something to the screen
 
 ---
@@ -55,10 +59,15 @@ Elliot Stern
 # Brief History
 
 - 1936: Lambda Calculus
+
 - 1958: LISP
+
 - 1973: ML
+
 - 1990: Haskell
+
 - 2005: F#
+
 - 2004: Scala
 
 Many multiparadigm languages with functional influences: Python, Ruby, Javascript, Scala, F#, C#, Rust.
@@ -97,16 +106,26 @@ def sum(list):
 ---
 
 # How do we write referentially transparent code?
+
 * Immutability
+
 * Explicitly passed "state"
+
 * Recursion
+
 * First-class functions
+
 * Push effects to the edge of your code
 
+
 Additionally, functional languages often have:
+
 * Expression-oriented syntax
+
 * Type inference
+
 * Algebraic data types
+
 * No nulls
 
 ---
@@ -179,13 +198,19 @@ class MyGameState {
 # Why bother?
 
 * Testability
+
 * Local reasoning
+
 * Compositionality
+
 * Less buggy code
   - No fencepost errors in loops
   - No Null Pointer Exceptions in Haskell
+
 * Concision
+
 * Easy Refactoring
+
 * Optimizability
   - Trivial loop fusion
   - Trivial memoization
@@ -219,11 +244,14 @@ def doSomething(state: State) = {
 # Pure functional programming
 
 * _Everything_ is referentially transparent
+
 * Allows "equational reasoning"
     - Manipulate programs like equations in algebra class
     - ability to replace function with function definition
+
 * More complex
     - need to play some rhetorical tricks to turn side-effects into pure effects
+
 * Haskell, Elm, Clean, Miranda, Coq, Idris, Agda
 
 
@@ -232,8 +260,11 @@ def doSomething(state: State) = {
 # Impure functional programming
 
 * _Some_ things are referentially transparent
+
 * Up to programmer to remember what stuff is and isn't pure
+
 * Simple - dates back to 1958
+
 * Typically: core logic is wholly functional, with imperative shell that interacts with the real world
 
 
