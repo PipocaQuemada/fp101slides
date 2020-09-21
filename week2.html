@@ -36,6 +36,8 @@ Elliot Stern
 # Map
 ```javascript
 
+// [x,y,z].map(f) evaluates to [f(x), f(y), f(z)]
+
 function square(x){
   return x * x;
 }
@@ -61,15 +63,65 @@ function square(x){
 
 # Reduce
 ```javascript
-[1,2,3,4,5].reduce((accumulator, current) => current + accumulator )
-// turns into 1 + 2 + 3 + 4 + 5 = 15
+// applies a binary function to each element of a list, starting from the left
+// [x, y, z].reduce(f, initial) == f(f(f(initial, x), y), z)
+
+[1,2,3,4,5].reduce((accumulator, current) => current + accumulator, 0)
+// turns into ((((0 + 1) + 2) + 3) + 4) + 5 = 15
+```
+---
+# FlatMap
+```javascript
+// list.flatMap(f) == list.map(x).flat()
+
+[1,2,3].flatMap(x => [x, 2 * x, 3 * x])
+// [1,2,3,2,4,6,3,6,9]
+
+var range = [1,2,3,4,5,6,7,8,9,10]
+
+range.flatMap(a =>
+  range.flatMap(b =>
+    range.flatMap( c =>
+      if(a^2 + b^2 == c^2) {
+        return [(a, b, c)]
+      } else {
+        return []
+      })))
+
+```
+---
+
+``` javascript
+class Ordering {
+  // compare is a function that takes x and y
+  // and returns 0 if they're the same
+  // a positive number if x is greater than y
+  // a negative number if x is less than y
+  constructor(compare) {
+    this.compare = compare;
+  }
+
+  invert() {
+    return new Ordering( (x, y) => -this.compare(x, y));
+  }
+
+  contramap(f) {
+    return new Ordering( (x, y) => this.compare(f(x), f(y)));
+  }
+
+}
+
+var intOrdering = new Ordering((x, y) => x - y);
+var lengthOrdering = intOrdering.contramap(x => x.length);
+
+[[1], [2,3,4], [2,3]].sort(lengthOrdering.compare)
+charactersList.sort(lengthOrdering.contramap(c => c.inventory))
 ```
 
 ---
-
 # Free Variables
 
-- A variable which doesn't appear inside a function definition is "free" variable
+- A variable which doesn't appear inside a function definition is a "free" variable
 
 
 ```javascript
