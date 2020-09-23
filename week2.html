@@ -36,6 +36,7 @@ Elliot Stern
 # Map
 ```javascript
 
+// given an Array<A>, array.map(f : A => B) : Array[B]
 // [x,y,z].map(f) evaluates to [f(x), f(y), f(z)]
 
 function square(x){
@@ -64,6 +65,7 @@ function square(x){
 # Reduce
 ```javascript
 // applies a binary function to each element of a list, starting from the left
+// given an Array<A>, array.reduce(f: (B, A) => A, initial: B): B
 // [x, y, z].reduce(f, initial) == f(f(f(initial, x), y), z)
 
 [1,2,3,4,5].reduce((accumulator, current) => current + accumulator, 0)
@@ -73,6 +75,7 @@ function square(x){
 # FlatMap
 ```javascript
 // list.flatMap(f) == list.map(x).flat()
+// given an Array[A], array.flatMap(f : A => Array[B]) : Array[B]
 
 [1,2,3].flatMap(x => [x, 2 * x, 3 * x])
 // [1,2,3,2,4,6,3,6,9]
@@ -97,6 +100,7 @@ class Ordering {
   // and returns 0 if they're the same
   // a positive number if x is greater than y
   // a negative number if x is less than y
+  // constructor(compare: (A, A) => number) : Ordering[A]
   constructor(compare) {
     this.compare = compare;
   }
@@ -105,16 +109,20 @@ class Ordering {
     return new Ordering( (x, y) => -this.compare(x, y));
   }
 
+  // contramap(f: B => A): Ordering[B]
   contramap(f) {
     return new Ordering( (x, y) => this.compare(f(x), f(y)));
   }
 
 }
 
+// intOrdering : Ordering[number]
 var intOrdering = new Ordering((x, y) => x - y);
+// lengthOrdering : forall A.  Ordering[Array[A]]
 var lengthOrdering = intOrdering.contramap(x => x.length);
 
 [[1], [2,3,4], [2,3]].sort(lengthOrdering.compare)
+// lengthOrdering.contramap(c => c.inventory) : Ordering[Character]
 charactersList.sort(lengthOrdering.contramap(c => c.inventory))
 ```
 
