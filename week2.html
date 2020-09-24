@@ -28,7 +28,9 @@ Elliot Stern
 # First-class functions
 
 - "First class" means that it's something the language can manipulate, just like any other "normal" value
+
 - For example: the ability to store in a variable, to take as a function parameter, or use as a functions return value.
+
 - So: first class functions can be returned from functions, or taken as arguments
 
 ---
@@ -62,22 +64,48 @@ function square(x){
 
 ---
 
+# Anonymous Functions, cont.
+
+- First class anonymous functions are syntactically lightweight
+
+- This makes it easy to turn patterns or language features into ordinary library functions
+
+```python
+  try:
+    f = open("week1.html", "r")
+    for line in f:
+      print(line, end='')
+  finally:
+    f.close()
+```
+
+```haskell
+-- withFile handles closing the file after we've printed it
+withFile "week1.html" ReadMode (\f -> hGetContents f >>= putStrLn)
+```
+---
+
 # Reduce
 ```javascript
 // applies a binary function to each element of a list, starting from the left
+
 // given an Array<A>, array.reduce(f: (B, A) => A, initial: B): B
+
 // [x, y, z].reduce(f, initial) == f(f(f(initial, x), y), z)
 
 [1,2,3,4,5].reduce((accumulator, current) => current + accumulator, 0)
+
 // turns into ((((0 + 1) + 2) + 3) + 4) + 5 = 15
 ```
 ---
 # FlatMap
 ```javascript
 // list.flatMap(f) == list.map(x).flat()
+
 // given an Array[A], array.flatMap(f : A => Array[B]) : Array[B]
 
 [1,2,3].flatMap(x => [x, 2 * x, 3 * x])
+
 // [1,2,3,2,4,6,3,6,9]
 
 var range = [1,2,3,4,5,6,7,8,9,10]
@@ -96,10 +124,11 @@ range.flatMap(a =>
 
 ``` javascript
 class Ordering {
-  // compare is a function that takes x and y
-  // and returns 0 if they're the same
-  // a positive number if x is greater than y
-  // a negative number if x is less than y
+
+  // compare returns 0 if the arguments are the same
+  // a positive number if the first is greater
+  // a negative number if the first is smaller
+
   // constructor(compare: (A, A) => number) : Ordering[A]
   constructor(compare) {
     this.compare = compare;
@@ -118,10 +147,12 @@ class Ordering {
 
 // intOrdering : Ordering[number]
 var intOrdering = new Ordering((x, y) => x - y);
+
 // lengthOrdering : forall A.  Ordering[Array[A]]
 var lengthOrdering = intOrdering.contramap(x => x.length);
 
 [[1], [2,3,4], [2,3]].sort(lengthOrdering.compare)
+
 // lengthOrdering.contramap(c => c.inventory) : Ordering[Character]
 charactersList.sort(lengthOrdering.contramap(c => c.inventory))
 ```
@@ -181,11 +212,34 @@ that objects are truly a poor man's closures."  Qc Na responded by hitting
 Anton with his stick, saying "When will you learn? Closures are a poor man's
 object."  At that moment, Anton became enlightened.
 
+---
+```javascript
+# Closure as poor mans object
+function average(total, count) {
+  // ..args means this takes a variable number of arguments
+  return function(selector, ...args) {
+    switch (selector) {
+        case "total": return total;
+        case "count": return count;
+        case "val": return total / count;
+        case "add":
+            var other = args[0];
+            return average(total + other("total"), count + other("count"));
+        default: return undefined;
+    }
+  }
+}
+
+var zeroAverage = average(0, 0);
+function toAverage(x) {
+    return average(x, 1);
+}
+```
 
 ---
-# Closures as a poor man's object
+# Closures as a poor man's object, cont.
 ```javascript
-// Javascript object
+// traditional Javascript object
 function Average(total, count) {
     this.total = total;
     this.count = count;
@@ -195,25 +249,6 @@ function Average(total, count) {
 var zeroAverage = new Average(0, 0)
 function toAverage(x) {
     return new Average(x, 1);
-}
-// closure as object
-function average2(total, count) {
-  return function(selector, ...args) { // ..args means this takes a variable number of arguments
-    switch (selector) {
-        case "total": return total;
-        case "count": return count;
-        case "val": return total / count;
-        case "add":
-            var other = args[0];
-            return average2(total + other("total"), count + other("count"));
-        default: return undefined;
-    }
-  }
-}
-
-var zeroAverage2 = average2(0, 0);
-function toAverage2(x) {
-    return average2(x, 1);
 }
 ```
 ---
@@ -225,6 +260,8 @@ function toAverage2(x) {
   // 3
 
 ```
+---
+# Questions?
 
       </textarea>
     <script src="https://remarkjs.com/downloads/remark-latest.min.js" type="text/javascript">
